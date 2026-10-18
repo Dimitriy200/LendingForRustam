@@ -1,0 +1,1009 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Прямой Угол — ремонт квартир и домов в Москве | Смета за 24 часа</title>
+<meta name="description" content="Ремонт и отделка квартир, домов и таунхаусов под ключ. Смета фиксируется в договоре, гарантия 5 лет, поэтапная оплата.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;800&family=Golos+Text:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+/* ============ БАЗА ============ */
+:root{
+  --paper:#f3eee3; --paper2:#faf7ef; --ink:#1b1813; --ink2:#26221c;
+  --mut:#7e7666; --acc:#e8551f; --acc-d:#c64312;
+  --line:#d9d0bd; --line-d:rgba(240,234,220,.16);
+  --fd:'Unbounded',sans-serif; --fb:'Golos Text',sans-serif; --fm:'JetBrains Mono',monospace;
+  --sh:10px 10px 0 rgba(27,24,19,.09);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:96px}
+body{background:var(--paper);color:var(--ink);font-family:var(--fb);font-size:16px;line-height:1.6;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0;z-index:1500;pointer-events:none;opacity:.05;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/></filter><rect width='200' height='200' filter='url(%23n)' opacity='0.6'/></svg>")}
+::selection{background:var(--acc);color:#fff}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer}
+:focus-visible{outline:2px solid var(--acc);outline-offset:3px}
+.wrap{width:min(1220px,92%);margin:0 auto}
+section{padding:100px 0;position:relative}
+h1,h2,h3{font-family:var(--fd);font-weight:600;line-height:1.08;letter-spacing:-.01em;text-transform:uppercase}
+h2{font-size:clamp(26px,3.4vw,46px)}
+.sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;margin-bottom:52px;flex-wrap:wrap}
+.lab{font:500 12px/1 var(--fm);letter-spacing:.2em;text-transform:uppercase;color:var(--mut);display:flex;align-items:center;gap:12px;margin-bottom:18px}
+.lab::before{content:"";width:36px;height:2px;background:var(--acc)}
+.sec-note{max-width:320px;color:var(--mut);font-size:14px}
+.dark{background:var(--ink);color:#efe9db}
+.dark .lab{color:#a89f8d}
+.dark .sec-note{color:#a89f8d}
+
+/* кнопки */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:12px;font:600 13px/1 var(--fm);
+  letter-spacing:.1em;text-transform:uppercase;padding:18px 26px;border:1px solid var(--ink);
+  background:var(--ink);color:var(--paper);transition:all .3s cubic-bezier(.16,1,.3,1);white-space:nowrap}
+.btn .ar{transition:transform .3s}
+.btn:hover{background:var(--acc);border-color:var(--acc);color:#fff;transform:translateY(-3px)}
+.btn:hover .ar{transform:translateX(5px)}
+.btn.ghost{background:transparent;color:var(--ink)}
+.btn.ghost:hover{background:var(--ink);color:var(--paper)}
+.dark .btn{background:var(--acc);border-color:var(--acc);color:#fff}
+.dark .btn:hover{background:var(--paper);border-color:var(--paper);color:var(--ink)}
+
+/* появление */
+[data-rv]{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .8s cubic-bezier(.16,1,.3,1);transition-delay:var(--d,0s)}
+[data-rv].in{opacity:1;transform:none}
+
+/* ============ ШАПКА ============ */
+header{position:fixed;top:0;left:0;right:0;z-index:1000;transition:background .3s,box-shadow .3s;border-bottom:1px solid transparent}
+header.sc{background:rgba(243,238,227,.92);backdrop-filter:blur(8px);border-bottom-color:var(--line);box-shadow:0 1px 0 rgba(27,24,19,.05)}
+.hrow{display:flex;align-items:center;justify-content:space-between;height:76px;gap:20px}
+.logo{display:flex;align-items:center;gap:12px}
+.logo-m{width:40px;height:40px;background:var(--acc);color:#fff;display:grid;place-items:center;font:600 12px var(--fd);flex:none}
+.logo-t{font:600 14px var(--fd);letter-spacing:.04em;text-transform:uppercase;line-height:1}
+.logo-t small{display:block;font:400 9px var(--fm);letter-spacing:.22em;color:var(--mut);margin-top:5px;text-transform:uppercase}
+nav.main{display:flex;gap:30px}
+nav.main a{font:500 12px var(--fm);letter-spacing:.12em;text-transform:uppercase;position:relative;padding:6px 0}
+nav.main a::after{content:"";position:absolute;left:0;bottom:0;height:2px;width:0;background:var(--acc);transition:width .3s}
+nav.main a:hover::after,nav.main a.on::after{width:100%}
+.hphone{font:600 14px var(--fm);letter-spacing:.02em}
+.hphone span{display:block;font:400 10px var(--fm);color:var(--mut);letter-spacing:.14em;margin-top:2px}
+.burger{display:none;background:none;border:1px solid var(--ink);width:44px;height:44px;position:relative}
+.burger i,.burger i::before,.burger i::after{content:"";position:absolute;left:11px;right:11px;height:2px;background:var(--ink);transition:.3s}
+.burger i{top:50%;margin-top:-1px}
+.burger i::before{top:-7px;left:0;right:0}.burger i::after{top:7px;left:0;right:0}
+.mnav{position:fixed;inset:0;background:var(--ink);color:var(--paper);z-index:1100;display:flex;flex-direction:column;justify-content:center;padding:8%;transform:translateY(-102%);transition:transform .5s cubic-bezier(.16,1,.3,1)}
+.mnav.open{transform:none}
+.mnav a{font:600 clamp(26px,7vw,44px) var(--fd);text-transform:uppercase;padding:10px 0;border-bottom:1px solid var(--line-d);display:flex;justify-content:space-between}
+.mnav a small{font:400 12px var(--fm);color:var(--acc);align-self:center}
+.mnav .mclose{position:absolute;top:20px;right:20px;background:none;border:1px solid var(--line-d);color:var(--paper);width:46px;height:46px;font-size:20px}
+
+/* ============ ХИРО ============ */
+.hero{padding:170px 0 0;min-height:100svh;display:flex;flex-direction:column;
+  background-image:linear-gradient(rgba(27,24,19,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(27,24,19,.05) 1px,transparent 1px);
+  background-size:52px 52px}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center;flex:1}
+.kick{font:500 12px var(--fm);letter-spacing:.22em;text-transform:uppercase;color:var(--mut);display:flex;align-items:center;gap:10px;margin-bottom:26px}
+.kick::before{content:"";width:9px;height:9px;background:var(--acc);flex:none}
+h1{font-size:clamp(31px,5vw,62px);font-weight:800}
+.mline{display:block;overflow:hidden;padding-bottom:.08em;margin-bottom:-.08em}
+.mline>span{display:block;transform:translateY(112%);transition:transform 1s cubic-bezier(.16,1,.3,1)}
+body.loaded .mline>span{transform:none}
+h1 .em{color:var(--acc)}
+.lead{margin:26px 0 34px;max-width:480px;color:var(--ink2);font-size:17px}
+.cta-row{display:flex;gap:14px;flex-wrap:wrap}
+.trust-line{margin-top:34px;font:400 12px var(--fm);letter-spacing:.1em;color:var(--mut);text-transform:uppercase;display:flex;gap:18px;flex-wrap:wrap}
+.trust-line b{color:var(--acc);font-weight:400}
+
+.hero-media{position:relative;border:1px solid var(--ink);background:var(--ink)}
+.hm-frame{position:relative;overflow:hidden;aspect-ratio:4/3}
+.hm-frame img{width:100%;height:100%;object-fit:cover}
+.kenburns{animation:kb 20s ease-in-out infinite alternate}
+@keyframes kb{from{transform:scale(1)}to{transform:scale(1.1) translate(-1.5%,1.5%)}}
+.laser{position:absolute;left:0;right:0;height:2px;background:var(--acc);box-shadow:0 0 14px 2px rgba(232,85,31,.8);z-index:3;animation:lz 8s ease-in-out infinite}
+.laser::before,.laser::after{content:"";position:absolute;top:-3px;width:8px;height:8px;background:var(--acc);border-radius:50%}
+.laser::before{left:-2px}.laser::after{right:-2px}
+@keyframes lz{0%,100%{top:20%}50%{top:76%}}
+.dim{position:absolute;z-index:4;font:500 10px var(--fm);color:#fff}
+.dim span{background:rgba(27,24,19,.82);padding:3px 8px;letter-spacing:.08em}
+.dim-x{top:16px;left:7%;right:7%;border-top:1px solid rgba(255,255,255,.85);display:flex;justify-content:center}
+.dim-x::before,.dim-x::after{content:"";position:absolute;top:-6px;width:1px;height:12px;background:rgba(255,255,255,.85)}
+.dim-x::before{left:0}.dim-x::after{right:0}
+.dim-y{left:14px;top:12%;bottom:12%;border-left:1px solid rgba(255,255,255,.85);display:flex;align-items:center}
+.dim-y span{transform:rotate(-90deg) translateX(0);white-space:nowrap}
+.dim-y::before,.dim-y::after{content:"";position:absolute;left:-6px;height:1px;width:12px;background:rgba(255,255,255,.85)}
+.dim-y::before{top:0}.dim-y::after{bottom:0}
+.ticket{position:absolute;right:-16px;bottom:26px;background:var(--paper2);border:1px solid var(--ink);padding:16px 18px;z-index:5;transform:rotate(3deg);box-shadow:var(--sh);font-family:var(--fm);animation:float 6s ease-in-out infinite}
+@keyframes float{0%,100%{transform:rotate(3deg) translateY(0)}50%{transform:rotate(2deg) translateY(-9px)}}
+.ticket b{display:block;font-size:13px;letter-spacing:.08em}
+.ticket small{font-size:11px;color:var(--mut);letter-spacing:.04em}
+.ticket .cd{color:var(--acc);font-weight:700;font-size:13px}
+
+/* статистика */
+.stats{margin-top:80px;border-top:1px solid var(--ink);border-bottom:1px solid var(--ink);display:grid;grid-template-columns:repeat(4,1fr)}
+.stat{padding:30px 26px;border-right:1px solid var(--ink);display:flex;flex-direction:column;gap:6px}
+.stat:last-child{border-right:0}
+.stat b{font:600 clamp(30px,3.4vw,46px)/1 var(--fd)}
+.stat b i{font-style:normal;color:var(--acc)}
+.stat span{font:400 11px var(--fm);letter-spacing:.16em;text-transform:uppercase;color:var(--mut)}
+.live{display:inline-flex;align-items:center;gap:10px;font:500 12px var(--fm);letter-spacing:.1em;text-transform:uppercase;padding:14px 0;color:var(--mut)}
+.live .dot{width:9px;height:9px;background:var(--acc);border-radius:50%;animation:pulse 1.8s infinite}
+.live b{color:var(--ink);transition:transform .3s}
+.live b.pop{transform:scale(1.35);color:var(--acc)}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(232,85,31,.5)}70%{box-shadow:0 0 0 9px rgba(232,85,31,0)}100%{box-shadow:0 0 0 0 rgba(232,85,31,0)}}
+
+/* рулетка */
+.ruler{height:38px;border-bottom:1px solid var(--ink);overflow:hidden;display:flex;background:var(--paper2)}
+.ruler span{flex:0 0 92px;border-left:1px solid var(--ink);font:400 9px var(--fm);padding:4px 0 0 5px;color:var(--mut);position:relative}
+.ruler span::after{content:"";position:absolute;left:0;right:0;bottom:0;height:9px;
+  background:repeating-linear-gradient(90deg,var(--ink) 0 1px,transparent 1px 9.2px)}
+
+/* бегущая строка */
+.marq{background:var(--ink);color:var(--paper);overflow:hidden;border-bottom:1px solid var(--ink)}
+.marq-track{display:flex;width:max-content;animation:mq 30s linear infinite}
+.marq:hover .marq-track{animation-play-state:paused}
+.marq-track span{padding:16px 30px;font:500 13px var(--fm);letter-spacing:.18em;text-transform:uppercase;display:flex;align-items:center;gap:30px;white-space:nowrap}
+.marq-track i{font-style:normal;color:var(--acc)}
+@keyframes mq{to{transform:translateX(-50%)}}
+.hazard{height:12px;background:repeating-linear-gradient(-45deg,var(--ink) 0 14px,var(--acc) 14px 28px);animation:hz 3s linear infinite}
+@keyframes hz{to{background-position:39.6px 0}}
+
+/* ============ УСЛУГИ ============ */
+.svc-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:14px}
+.svc{border:1px solid var(--ink);background:var(--paper2);padding:28px;display:flex;flex-direction:column;gap:12px;position:relative;transition:transform .35s cubic-bezier(.16,1,.3,1),box-shadow .35s,background .35s;min-height:220px}
+.svc:hover{transform:translateY(-6px);box-shadow:var(--sh)}
+.svc .n{font:500 12px var(--fm);color:var(--mut);letter-spacing:.14em}
+.svc h3{font-size:17px}
+.svc p{font-size:14px;color:var(--mut);flex:1}
+.svc .arr{font:500 12px var(--fm);letter-spacing:.12em;text-transform:uppercase;display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--line);padding-top:14px;margin-top:8px}
+.svc .arr i{font-style:normal;transition:transform .3s;color:var(--acc)}
+.svc:hover .arr i{transform:translateX(6px)}
+.svc .tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:4px}
+.svc .tags em{font:400 10px var(--fm);font-style:normal;letter-spacing:.08em;text-transform:uppercase;border:1px solid currentColor;padding:4px 9px;opacity:.75}
+.c2{grid-column:span 2}.c3{grid-column:span 3}.c4{grid-column:span 4}
+.svc-dark{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.svc-dark .n,.svc-dark p{color:#a89f8d}
+.svc-dark .arr{border-color:var(--line-d)}
+.svc-acc{background:var(--acc);color:#fff;border-color:var(--acc)}
+.svc-acc .n{color:rgba(255,255,255,.8)}.svc-acc p{color:rgba(255,255,255,.88)}
+.svc-acc .arr{border-color:rgba(255,255,255,.4)}
+
+/* ============ БЫЛО/СТАЛО ============ */
+.ba-sec{background:var(--paper2)}
+.ba{position:relative;aspect-ratio:16/9;border:1px solid var(--ink);overflow:hidden;user-select:none;background:var(--ink)}
+.ba:focus-within{outline:3px solid var(--acc);outline-offset:4px}
+.ba img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.ba .before-img{filter:grayscale(1) contrast(1.08) brightness(.94)}
+.ba-before{position:absolute;inset:0;clip-path:inset(0 calc(100% - var(--pos,50%)) 0 0)}
+.ba-handle{position:absolute;top:0;bottom:0;left:var(--pos,50%);width:2px;background:var(--acc);transform:translateX(-1px);pointer-events:none;z-index:3}
+.ba-grip{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:52px;height:52px;background:var(--acc);color:#fff;display:grid;place-items:center;font-size:20px;box-shadow:0 4px 18px rgba(0,0,0,.35)}
+.ba input[type=range]{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:ew-resize;margin:0;z-index:4}
+.chip{position:absolute;top:16px;font:600 11px var(--fm);letter-spacing:.16em;padding:8px 14px;z-index:2;pointer-events:none}
+.chip.l{left:16px;background:rgba(27,24,19,.85);color:#fff}
+.chip.r{right:16px;background:var(--acc);color:#fff}
+.ba-meta{display:flex;gap:40px;flex-wrap:wrap;margin-top:26px}
+.ba-meta div{font:400 12px var(--fm);color:var(--mut);letter-spacing:.1em;text-transform:uppercase}
+.ba-meta b{display:block;font:600 20px var(--fd);color:var(--ink);margin-top:4px;text-transform:none}
+.ba-pct{font:600 14px var(--fm);color:var(--acc)}
+
+/* ============ КАЛЬКУЛЯТОР ============ */
+.calc-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:56px;align-items:start}
+.ctl{margin-bottom:36px}
+.ctl>label,.ctl>.ctl-lab{display:block;font:500 12px var(--fm);letter-spacing:.2em;text-transform:uppercase;color:#a89f8d;margin-bottom:14px}
+.seg{display:flex;border:1px solid var(--line-d)}
+.seg button{flex:1;background:none;border:0;color:#efe9db;font:500 13px var(--fm);letter-spacing:.1em;text-transform:uppercase;padding:16px 8px;transition:.25s;border-right:1px solid var(--line-d)}
+.seg button:last-child{border-right:0}
+.seg button.on{background:var(--paper);color:var(--ink)}
+.rt{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.rt label{border:1px solid var(--line-d);padding:18px 16px;cursor:pointer;transition:.25s;position:relative}
+.rt label:hover{border-color:#efe9db}
+.rt input{position:absolute;opacity:0}
+.rt b{display:block;font:600 14px var(--fb);margin-bottom:6px}
+.rt small{font:400 12px var(--fm);color:var(--acc)}
+.rt label.on{border-color:var(--acc);background:rgba(232,85,31,.1)}
+.rt label.on::after{content:"✓";position:absolute;top:10px;right:12px;color:var(--acc);font-weight:700}
+.area-row{display:flex;align-items:baseline;gap:18px;margin-bottom:14px}
+.area-row output{font:600 clamp(38px,4.5vw,56px)/1 var(--fd);color:#efe9db}
+.area-row small{font:400 13px var(--fm);color:#a89f8d}
+input[type=range].ar{width:100%;-webkit-appearance:none;appearance:none;height:3px;background:var(--line-d);outline-offset:6px}
+input[type=range].ar::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;background:var(--acc);cursor:pointer;border:2px solid var(--paper);box-shadow:0 2px 8px rgba(0,0,0,.4)}
+input[type=range].ar::-moz-range-thumb{width:20px;height:20px;background:var(--acc);cursor:pointer;border:2px solid var(--paper);border-radius:0}
+.range-marks{display:flex;justify-content:space-between;font:400 10px var(--fm);color:#7a7261;margin-top:8px}
+.togs{display:flex;gap:10px;flex-wrap:wrap}
+.tog input{position:absolute;opacity:0}
+.tog span{display:inline-block;font:500 12px var(--fm);letter-spacing:.08em;text-transform:uppercase;border:1px solid var(--line-d);padding:13px 18px;color:#efe9db;transition:.25s;cursor:pointer}
+.tog input:checked+span{background:var(--acc);border-color:var(--acc);color:#fff}
+.tog input:focus-visible+span{outline:2px solid var(--acc);outline-offset:3px}
+.tog small{display:block;font-size:10px;opacity:.65;letter-spacing:.04em;margin-top:3px;text-transform:none}
+
+.bill{background:var(--paper);color:var(--ink);border:1px solid var(--ink);padding:34px 32px;position:sticky;top:100px;box-shadow:14px 14px 0 rgba(0,0,0,.28)}
+.bill-head{display:flex;justify-content:space-between;font:500 12px var(--fm);letter-spacing:.12em;border-bottom:2px solid var(--ink);padding-bottom:14px;margin-bottom:6px}
+.bill-head b{color:var(--acc)}
+.brow{display:flex;justify-content:space-between;gap:16px;padding:13px 0;border-bottom:1px dashed var(--line);font-size:14px}
+.brow span:last-child{font-family:var(--fm);font-size:13px;white-space:nowrap}
+.brow .off{color:#b6ad9b;text-decoration:line-through}
+.bill-total{padding:22px 0 6px}
+.bill-total small{font:500 11px var(--fm);letter-spacing:.2em;text-transform:uppercase;color:var(--mut)}
+.bill-total b{display:block;font:600 clamp(30px,3vw,40px)/1.15 var(--fd)}
+.bill-total b em{font-style:normal;color:var(--acc)}
+.bill-meta{display:flex;gap:24px;font:400 12px var(--fm);color:var(--mut);margin:10px 0 20px}
+.bill .btn{width:100%}
+.bill-note{font-size:12px;color:var(--mut);margin-top:14px;line-height:1.5}
+.stamp{position:absolute;top:18px;right:-12px;transform:rotate(6deg);border:2px solid var(--acc);color:var(--acc);font:700 10px var(--fm);letter-spacing:.2em;padding:6px 10px;text-transform:uppercase;opacity:.9}
+
+/* ============ ЭТАПЫ ============ */
+.proc{display:grid;grid-template-columns:.9fr 1.1fr;gap:70px}
+.proc-sticky{position:sticky;top:110px;align-self:start}
+.p-idx{font:600 clamp(52px,6vw,84px)/1 var(--fd);margin:26px 0 20px}
+.p-idx i{font-style:normal;color:var(--acc)}
+.p-idx small{font:400 20px var(--fd);color:var(--mut)}
+.p-bar{height:3px;background:var(--line);margin-bottom:26px}
+.p-bar i{display:block;height:100%;background:var(--acc);width:16%;transition:width .5s cubic-bezier(.16,1,.3,1)}
+.step{border-top:1px solid var(--ink);padding:30px 0;display:grid;grid-template-columns:74px 1fr;gap:20px;opacity:.32;transition:opacity .45s}
+.step:last-child{border-bottom:1px solid var(--ink)}
+.step.on{opacity:1}
+.step .sn{font:600 15px var(--fm);color:var(--acc)}
+.step h3{font-size:18px;margin-bottom:10px}
+.step p{font-size:14.5px;color:var(--mut)}
+.step .dur{display:inline-block;margin-top:12px;font:400 11px var(--fm);letter-spacing:.12em;text-transform:uppercase;border:1px solid var(--line);padding:6px 12px;color:var(--mut)}
+
+/* ============ ПОРТФОЛИО (стопка) ============ */
+.stack{display:grid;gap:28px}
+.pcard{position:sticky;top:calc(92px + var(--i)*22px);background:var(--paper2);border:1px solid var(--ink);display:grid;grid-template-columns:1.1fr 1fr;min-height:420px;overflow:hidden;box-shadow:0 -14px 30px rgba(27,24,19,.08)}
+.pcard .pimg{overflow:hidden;position:relative}
+.pcard .pimg img{width:100%;height:100%;object-fit:cover;transition:transform 1.4s cubic-bezier(.16,1,.3,1)}
+.pcard:hover .pimg img{transform:scale(1.06)}
+.pcard .pimg::after{content:attr(data-tag);position:absolute;top:16px;left:16px;background:var(--ink);color:#fff;font:500 11px var(--fm);letter-spacing:.14em;padding:8px 13px;text-transform:uppercase}
+.pinfo{padding:36px 34px;display:flex;flex-direction:column;gap:16px}
+.pinfo .pn{font:500 12px var(--fm);color:var(--acc);letter-spacing:.16em}
+.pinfo h3{font-size:clamp(18px,2vw,24px)}
+.pinfo>p{font-size:14.5px;color:var(--mut)}
+.pmeta{display:grid;grid-template-columns:1fr 1fr;gap:14px 24px;margin-top:auto;border-top:1px solid var(--line);padding-top:20px}
+.pmeta div small{display:block;font:400 10px var(--fm);letter-spacing:.16em;text-transform:uppercase;color:var(--mut);margin-bottom:4px}
+.pmeta div b{font:600 16px var(--fb)}
+.stack-more{margin-top:40px;text-align:center}
+
+/* гарантии */
+.guar{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--ink);color:#efe9db}
+.guar-row{display:grid;grid-template-columns:repeat(4,1fr)}
+.guar-item{padding:44px 28px;border-right:1px solid var(--line-d)}
+.guar-item:last-child{border-right:0}
+.guar-item b{font:600 clamp(26px,3vw,40px)/1 var(--fd);color:var(--acc);display:block;margin-bottom:12px}
+.guar-item p{font-size:13.5px;color:#a89f8d}
+.partners{text-align:center;font:400 12px var(--fm);letter-spacing:.24em;text-transform:uppercase;color:#6f6857;padding:26px 0 0}
+.partners i{font-style:normal;color:var(--acc);padding:0 8px}
+
+/* ============ ЦЕНЫ ============ */
+.price-row{display:grid;grid-template-columns:1.2fr .8fr auto;gap:20px;align-items:center;padding:28px 10px;border-top:1px solid var(--ink);transition:background .3s,padding .3s}
+.price-row:last-of-type{border-bottom:1px solid var(--ink)}
+.price-row:hover{background:var(--paper2);padding-left:22px}
+.price-row h3{font-size:17px;margin-bottom:6px}
+.price-row .pd{font-size:13px;color:var(--mut);max-width:520px}
+.price-row .inc{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+.price-row .inc em{font:400 10px var(--fm);font-style:normal;letter-spacing:.06em;border:1px solid var(--line);padding:4px 9px;color:var(--mut)}
+.price-row .pr{font:600 clamp(19px,2.2vw,27px) var(--fd);text-align:right;white-space:nowrap}
+.price-row .pr small{display:block;font:400 11px var(--fm);color:var(--mut);margin-top:5px;text-transform:uppercase;letter-spacing:.1em}
+.price-foot{font:400 12px var(--fm);color:var(--mut);margin-top:22px;letter-spacing:.04em}
+
+/* ============ ОТЗЫВЫ ============ */
+.rev-ctrl{display:flex;gap:10px}
+.rev-btn{width:52px;height:52px;border:1px solid var(--ink);background:transparent;font-size:19px;transition:.25s;display:grid;place-items:center}
+.rev-btn:hover{background:var(--acc);border-color:var(--acc);color:#fff}
+.rev-track{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding:6px 0 22px;scrollbar-width:none}
+.rev-track::-webkit-scrollbar{display:none}
+.rev{flex:0 0 min(380px,84vw);scroll-snap-align:start;border:1px solid var(--ink);background:var(--paper2);padding:28px;display:flex;flex-direction:column;gap:16px;transition:transform .3s}
+.rev:hover{transform:translateY(-5px)}
+.rev .stars{color:var(--acc);letter-spacing:3px;font-size:14px}
+.rev p{font-size:14.5px;line-height:1.65;flex:1}
+.rev footer{border-top:1px solid var(--line);padding-top:16px;display:flex;justify-content:space-between;gap:10px}
+.rev footer b{font-size:14px}
+.rev footer small{font:400 11px var(--fm);color:var(--mut);letter-spacing:.06em}
+
+/* ============ FAQ ============ */
+.faq{display:grid;grid-template-columns:.8fr 1.2fr;gap:70px;align-items:start}
+.faq-side{position:sticky;top:110px}
+.fq{border-top:1px solid var(--ink)}
+.fq:last-child{border-bottom:1px solid var(--ink)}
+.fq-q{width:100%;background:none;border:0;display:flex;justify-content:space-between;align-items:center;gap:20px;padding:24px 4px;text-align:left;font:600 17px var(--fb);color:var(--ink)}
+.fq-q i{font-style:normal;font-size:24px;font-weight:300;color:var(--acc);transition:transform .35s;flex:none}
+.fq.open .fq-q i{transform:rotate(45deg)}
+.fq-a{max-height:0;overflow:hidden;transition:max-height .45s cubic-bezier(.16,1,.3,1)}
+.fq-a p{padding:0 44px 26px 4px;color:var(--mut);font-size:14.5px;max-width:600px}
+
+/* ============ КОНТАКТЫ ============ */
+.contact{background-image:linear-gradient(rgba(240,234,220,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(240,234,220,.05) 1px,transparent 1px);background-size:52px 52px}
+.c-grid{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:start}
+.c-list{margin-top:40px;display:flex;flex-direction:column;gap:26px}
+.c-list .cl small{display:block;font:400 11px var(--fm);letter-spacing:.2em;text-transform:uppercase;color:#a89f8d;margin-bottom:8px}
+.c-list .cl a.big{font:600 clamp(22px,2.6vw,32px) var(--fd);transition:color .25s}
+.c-list .cl a.big:hover{color:var(--acc)}
+.c-list .cl span{font-size:15px;color:#d8d1c2}
+.form-card{background:var(--paper);color:var(--ink);border:1px solid var(--ink);padding:38px 36px;position:relative;box-shadow:14px 14px 0 rgba(0,0,0,.28)}
+.form-card h3{font-size:19px;margin-bottom:8px}
+.form-card>p{font-size:13.5px;color:var(--mut);margin-bottom:28px}
+.field{margin-bottom:24px}
+.field label{display:block;font:500 11px var(--fm);letter-spacing:.2em;text-transform:uppercase;color:var(--mut);margin-bottom:8px}
+.field input,.field textarea{width:100%;border:0;border-bottom:1px solid var(--ink);background:transparent;padding:10px 2px;font:500 16px var(--fb);color:var(--ink);transition:border-color .25s;resize:vertical}
+.field input:focus,.field textarea:focus{outline:none;border-bottom:2px solid var(--acc)}
+.field.err input,.field.err textarea{border-bottom:2px solid #c22b1d;animation:shake .35s}
+.field .msg{display:none;font:400 11px var(--fm);color:#c22b1d;margin-top:6px}
+.field.err .msg{display:block}
+@keyframes shake{0%,100%{transform:none}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.consent{display:flex;gap:12px;align-items:flex-start;margin-bottom:26px;cursor:pointer}
+.consent input{position:absolute;opacity:0}
+.consent .box{width:20px;height:20px;border:1px solid var(--ink);flex:none;display:grid;place-items:center;font-size:13px;color:#fff;transition:.2s;margin-top:2px}
+.consent input:checked+.box{background:var(--acc);border-color:var(--acc)}
+.consent small{font-size:12px;color:var(--mut);line-height:1.5}
+.form-ok{display:none;text-align:center;padding:30px 0}
+.form-ok.show{display:block;animation:pop .5s cubic-bezier(.16,1,.3,1)}
+@keyframes pop{from{transform:scale(.85);opacity:0}to{transform:none;opacity:1}}
+.form-ok .okmark{width:74px;height:74px;background:var(--acc);color:#fff;display:grid;place-items:center;margin:0 auto 22px;font-size:32px}
+.form-ok b{font:600 19px var(--fd);text-transform:uppercase;display:block;margin-bottom:10px}
+.form-ok p{font-size:14px;color:var(--mut)}
+.form-ok .num{font:600 13px var(--fm);color:var(--acc);margin-top:14px;display:block;letter-spacing:.1em}
+
+/* ============ ФУТЕР ============ */
+footer{background:#12100c;color:#efe9db;padding:70px 0 0}
+.f-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:40px;padding-bottom:56px}
+.f-grid h4{font:500 12px var(--fm);letter-spacing:.22em;text-transform:uppercase;color:#7a7261;margin-bottom:20px}
+.f-grid a,.f-grid p{display:block;font-size:14px;color:#cfc8b8;padding:5px 0;transition:color .2s}
+.f-grid a:hover{color:var(--acc)}
+.f-brand p{max-width:300px;color:#8d8574;font-size:13.5px;margin-top:16px}
+.f-bottom{border-top:1px solid var(--line-d);padding:22px 0;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font:400 11px var(--fm);letter-spacing:.08em;color:#6f6857}
+.f-bottom a{color:#6f6857}.f-bottom a:hover{color:var(--acc)}
+
+@media(max-width:1024px){
+  nav.main,.hphone{display:none}
+  .burger{display:block}
+  .hero{padding-top:120px}
+  .hero-grid{grid-template-columns:1fr;gap:44px}
+  .svc-grid{grid-template-columns:repeat(2,1fr)}
+  .c2,.c3,.c4{grid-column:span 1}
+  .c4{grid-column:span 2}
+  .calc-grid,.proc,.faq,.c-grid{grid-template-columns:1fr;gap:44px}
+  .proc-sticky,.faq-side,.bill{position:static}
+  .pcard{grid-template-columns:1fr;min-height:0}
+  .pcard .pimg{aspect-ratio:16/9}
+  .guar-row{grid-template-columns:1fr 1fr}
+  .guar-item{border-bottom:1px solid var(--line-d)}
+  .price-row{grid-template-columns:1fr;gap:10px}
+  .price-row .pr{text-align:left}
+  .f-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:640px){
+  section{padding:70px 0}
+  .stats{grid-template-columns:1fr 1fr}
+  .stat{border-bottom:1px solid var(--ink)}
+  .stat:nth-child(even){border-right:0}
+  .svc-grid{grid-template-columns:1fr}
+  .c4{grid-column:span 1}
+  .rt{grid-template-columns:1fr}
+  .guar-row{grid-template-columns:1fr}
+  .ticket{right:8px;bottom:14px}
+  .f-grid{grid-template-columns:1fr}
+}
+
+/* ============ ДОСТУПНОСТЬ: МЕНЬШЕ ДВИЖЕНИЯ ============ */
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  html{scroll-behavior:auto}
+  .mline>span{transform:none}
+  [data-rv]{opacity:1;transform:none}
+  .step{opacity:1}
+}
+</style>
+</head>
+<body>
+
+<!-- ШАПКА -->
+<header id="hdr">
+  <div class="wrap hrow">
+    <a class="logo" href="#top" aria-label="Прямой Угол — на главную">
+      <span class="logo-m">90°</span>
+      <span class="logo-t">Прямой угол<small>ремонт и отделка</small></span>
+    </a>
+    <nav class="main" aria-label="Основная навигация">
+      <a href="#services">Услуги</a>
+      <a href="#calc">Калькулятор</a>
+      <a href="#works">Работы</a>
+      <a href="#prices">Цены</a>
+      <a href="#contact">Контакты</a>
+    </nav>
+    <div class="hphone"><a href="tel:+74951204567">+7 (495) 120-45-67</a><span>ежедневно 9:00–21:00</span></div>
+    <button class="btn" onclick="location.href='#contact'" style="padding:14px 20px">Смета</button>
+    <button class="burger" id="burger" aria-label="Открыть меню"><i></i></button>
+  </div>
+</header>
+
+<!-- МОБИЛЬНОЕ МЕНЮ -->
+<div class="mnav" id="mnav" aria-hidden="true">
+  <button class="mclose" id="mclose" aria-label="Закрыть меню">✕</button>
+  <a href="#services">Услуги <small>01</small></a>
+  <a href="#ba">Было/стало <small>02</small></a>
+  <a href="#calc">Калькулятор <small>03</small></a>
+  <a href="#works">Работы <small>04</small></a>
+  <a href="#prices">Цены <small>05</small></a>
+  <a href="#contact">Контакты <small>06</small></a>
+</div>
+
+<!-- ХИРО -->
+<section class="hero" id="top">
+  <div class="wrap hero-grid">
+    <div>
+      <p class="kick">Отделка · Ремонт · Москва и область · с 2008</p>
+      <h1>
+        <span class="mline"><span style="transition-delay:.1s">Ремонт квартир</span></span>
+        <span class="mline"><span style="transition-delay:.22s">и домов, который</span></span>
+        <span class="mline"><span style="transition-delay:.34s" class="em">сходится.</span></span>
+      </h1>
+      <p class="lead">Полный цикл отделки под ключ: от демонтажа и стяжки до финального клининга. Смета фиксируется в договоре до старта работ — и не растёт.</p>
+      <div class="cta-row">
+        <a class="btn" href="#calc">Получить смету за 24 часа <span class="ar">→</span></a>
+        <a class="btn ghost" href="#works">Смотреть работы</a>
+      </div>
+      <div class="trust-line"><span><b>—</b> Договор</span><span><b>—</b> Гарантия 5 лет</span><span><b>—</b> Поэтапная оплата</span><span><b>—</b> Допуск СРО</span></div>
+    </div>
+    <div class="hero-media" data-rv>
+      <div class="hm-frame">
+        <img class="kenburns" src="https://picsum.photos/seed/renovation-interior-apartment/1100/820" alt="Отделанная гостиная после ремонта">
+        <div class="laser" aria-hidden="true"></div>
+        <div class="dim dim-x" aria-hidden="true"><span>5 480 мм</span></div>
+        <div class="dim dim-y" aria-hidden="true"><span>3 240 мм</span></div>
+      </div>
+      <div class="ticket" aria-hidden="true">
+        <b>СМЕТА № 0427</b>
+        <small>будет готова через</small>
+        <div class="cd" id="cd">23:59:41</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-top:64px">
+    <p class="live"><span class="dot"></span> Сейчас на объектах — <b id="live">23</b>&nbsp;бригады</p>
+  </div>
+  <div class="wrap stats" data-rv>
+    <div class="stat"><b><span data-count="16">0</span> <i>лет</i></b><span>на рынке ремонта</span></div>
+    <div class="stat"><b><span data-count="480">0</span><i>+</i></b><span>объектов сдано</span></div>
+    <div class="stat"><b><span data-count="92">0</span><i>%</i></b><span>клиентов по рекомендации</span></div>
+    <div class="stat"><b><span data-count="5">0</span> <i>лет</i></b><span>гарантии на работы</span></div>
+  </div>
+  <div class="ruler" id="ruler" aria-hidden="true"></div>
+</section>
+
+<!-- БЕГУЩАЯ СТРОКА -->
+<div class="hazard" aria-hidden="true"></div>
+<div class="marq" aria-hidden="true">
+  <div class="marq-track" id="marq">
+    <span>Капитальный ремонт <i>✦</i></span><span>Отделка под ключ <i>✦</i></span><span>Дизайн-проект <i>✦</i></span><span>Электрика и сантехника <i>✦</i></span><span>Ванные комнаты <i>✦</i></span><span>Стяжка и штукатурка <i>✦</i></span><span>Фасады и кровля <i>✦</i></span>
+  </div>
+</div>
+
+<!-- УСЛУГИ -->
+<section id="services">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><p class="lab" data-sc>01 · Услуги</p><h2 data-rv>Что мы делаем</h2></div>
+      <p class="sec-note" data-rv style="--d:.15s">Берём объекты целиком или отдельные этапы — от одной комнаты до дома 400 м².</p>
+    </div>
+    <div class="svc-grid">
+      <article class="svc c4" data-rv>
+        <span class="n">/ 01</span>
+        <h3>Капитальный ремонт квартир</h3>
+        <p>Полная переделка вторички и новостройки: демонтаж, стяжка, штукатурка по маякам, замена всей электрики и сантехники, чистовая отделка.</p>
+        <div class="tags"><em>стяжка</em><em>электрика</em><em>сантехника</em><em>тёплый пол</em></div>
+        <div class="arr"><span>подробнее</span><i>→</i></div>
+      </article>
+      <article class="svc svc-dark c2" data-rv style="--d:.1s">
+        <span class="n">/ 02</span>
+        <h3>Дизайнерский ремонт</h3>
+        <p>Работа по дизайн-проекту: сложные потолки, свет, крупноформатный керамогранит, скрытые двери.</p>
+        <div class="arr"><span>подробнее</span><i>→</i></div>
+      </article>
+      <article class="svc c2" data-rv>
+        <span class="n">/ 03</span>
+        <h3>Ванные и санузлы</h3>
+        <p>Гидроизоляция, разводка, укладка плитки, установка сантехники. Санузел под ключ за 21 день.</p>
+        <div class="arr"><span>подробнее</span><i>→</i></div>
+      </article>
+      <article class="svc c2" data-rv style="--d:.1s">
+        <span class="n">/ 04</span>
+        <h3>Электрика и сантехника</h3>
+        <p>Разводка с нуля, замена щитка, штробление, коллекторные схемы. Акты скрытых работ на каждый узел.</p>
+        <div class="arr"><span>подробнее</span><i>→</i></div>
+      </article>
+      <article class="svc svc-acc c2" data-rv style="--d:.2s">
+        <span class="n">/ 05</span>
+        <h3>Дома и коттеджи</h3>
+        <p>Внутренняя отделка, фасады, кровля, инженерные сети. Работаем с деревом, газобетоном, каркасом.</p>
+        <div class="arr"><span>подробнее</span><i>→</i></div>
+      </article>
+      <article class="svc c3" data-rv>
+        <span class="n">/ 06</span>
+        <h3>Косметический ремонт</h3>
+        <p>Быстрое обновление без грязных работ: стены, потолки, полы, покраска, обои. Идеально перед сдачей или продажей.</p>
+        <div class="arr"><span>подробнее</span><i>→</i></div>
+      </article>
+      <article class="svc c3" data-rv style="--d:.1s">
+        <span class="n">/ 07</span>
+        <h3>Новостройки под ключ</h3>
+        <p>От бетонной коробки до переезда за один договор: черновая и чистовая отделка, мебельные допуски, клининг в подарок.</p>
+        <div class="arr"><span>подробнее</span><i>→</i></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- БЫЛО / СТАЛО -->
+<section class="ba-sec" id="ba">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><p class="lab" data-sc>02 · Было / стало</p><h2 data-rv>Потяните ползунок</h2></div>
+      <p class="sec-note" data-rv style="--d:.15s">ЖК «Метрополия», 62 м². Капитальный ремонт за 74 дня. <span class="ba-pct" id="baPct">50%</span></p>
+    </div>
+    <div class="ba" id="ba" data-rv style="--pos:50%">
+      <img src="https://picsum.photos/seed/apartment-after-renovation/1400/900" alt="Квартира после ремонта">
+      <div class="ba-before"><img class="before-img" src="https://picsum.photos/seed/old-apartment-before/1400/900" alt="Квартира до ремонта"></div>
+      <span class="chip l">Было</span><span class="chip r">Стало</span>
+      <div class="ba-handle"><span class="ba-grip">⇔</span></div>
+      <input type="range" min="0" max="100" value="50" id="baRange" aria-label="Сравнение до и после ремонта">
+    </div>
+    <div class="ba-meta" data-rv style="--d:.15s">
+      <div>Площадь <b>62 м²</b></div>
+      <div>Срок <b>74 дня</b></div>
+      <div>Бюджет <b>5,8 млн ₽</b></div>
+      <div>Тип <b>Капитальный</b></div>
+    </div>
+  </div>
+</section>
+
+<!-- КАЛЬКУЛЯТОР -->
+<section class="dark" id="calc">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><p class="lab" data-sc>03 · Калькулятор</p><h2 data-rv>Сколько стоит ваш ремонт?</h2></div>
+      <p class="sec-note" data-rv style="--d:.15s">Передвигайте ползунок и переключайте опции — сумма пересчитывается сразу.</p>
+    </div>
+    <div class="calc-grid">
+      <div data-rv>
+        <div class="ctl">
+          <label class="ctl-lab">Тип объекта</label>
+          <div class="seg" id="segObj">
+            <button class="on" data-m="1">Квартира</button>
+            <button data-m="1.12">Дом</button>
+            <button data-m="1.18">Комната</button>
+          </div>
+        </div>
+        <div class="ctl">
+          <label class="ctl-lab">Тип ремонта</label>
+          <div class="rt" id="rt">
+            <label class="on"><input type="radio" name="rt" value="cos" checked><b>Косметический</b><small>от 5 500 ₽/м²</small></label>
+            <label><input type="radio" name="rt" value="cap"><b>Капитальный</b><small>от 9 800 ₽/м²</small></label>
+            <label><input type="radio" name="rt" value="des"><b>Дизайнерский</b><small>от 15 500 ₽/м²</small></label>
+          </div>
+        </div>
+        <div class="ctl">
+          <label class="ctl-lab" for="area">Площадь помещения</label>
+          <div class="area-row"><output id="areaOut">68</output><small>м²</small></div>
+          <input class="ar" type="range" id="area" min="18" max="320" value="68" step="1">
+          <div class="range-marks"><span>18 м²</span><span>150 м²</span><span>320 м²</span></div>
+        </div>
+        <div class="ctl">
+          <label class="ctl-lab">Дополнительно</label>
+          <div class="togs">
+            <label class="tog"><input type="checkbox" id="optDem"><span>Демонтаж<small>+1 200 ₽/м²</small></span></label>
+            <label class="tog"><input type="checkbox" id="optProj"><span>Дизайн-проект<small>+1 100 ₽/м²</small></span></label>
+            <label class="tog"><input type="checkbox" id="optMat"><span>Черновые материалы<small>+4 300 ₽/м²</small></span></label>
+          </div>
+        </div>
+      </div>
+      <div class="bill" data-rv style="--d:.15s">
+        <span class="stamp">предварительно</span>
+        <div class="bill-head"><span>СМЕТА № <b id="billNo">2941</b></span><span id="billDate">—</span></div>
+        <div class="brow"><span>Отделочные работы</span><span id="bWork">666 400 ₽</span></div>
+        <div class="brow"><span>Демонтаж</span><span id="bDem" class="off">—</span></div>
+        <div class="brow"><span>Дизайн-проект</span><span id="bProj" class="off">—</span></div>
+        <div class="brow"><span>Черновые материалы</span><span id="bMat" class="off">—</span></div>
+        <div class="bill-total">
+          <small>Итого под ключ</small>
+          <b>≈ <em id="bTotal">666 400 ₽</em></b>
+        </div>
+        <div class="bill-meta"><span id="bPer">9 800 ₽/м²</span><span id="bDays">≈ 125 дней</span></div>
+        <button class="btn" id="fixBtn">Зафиксировать эту цену <span class="ar">→</span></button>
+        <p class="bill-note">Точная смета составляется после бесплатного замера и не может превысить договорную. Цены действительны 30 дней.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ЭТАПЫ -->
+<section id="process">
+  <div class="wrap proc">
+    <div class="proc-sticky">
+      <p class="lab" data-sc>04 · Этапы</p>
+      <h2 data-rv>Как проходит ремонт</h2>
+      <div class="p-idx" data-rv><i id="pIdx">01</i><small>/06</small></div>
+      <div class="p-bar"><i id="pFill"></i></div>
+      <p class="sec-note">Каждый этап принимается по чек-листу и оплачивается отдельно. Вы видите объект в личном кабинете с фотоотчётами каждые 2–3 дня.</p>
+    </div>
+    <div id="steps">
+      <div class="step" data-rv><span class="sn">01</span><div><h3>Замер и смета</h3><p>Инженер приезжает в удобное время, делает обмеры и фотофиксацию. Через 24 часа присылаем подробную смету по каждому помещению — цены фиксируем на 30 дней.</p><span class="dur">1 день · бесплатно</span></div></div>
+      <div class="step" data-rv><span class="sn">02</span><div><h3>Проект и планировка</h3><p>Готовим планировочное решение или полный дизайн-проект: розетки, свет, раскладка плитки, ведомости материалов. Согласовываем перепланировку.</p><span class="dur">7–20 дней</span></div></div>
+      <div class="step" data-rv><span class="sn">03</span><div><h3>Договор</h3><p>Фиксируем стоимость, график работ и штрафы за просрочку. Оплата поэтапная — аванс не более 10%. Гарантия 5 лет прописана в договоре.</p><span class="dur">1 день</span></div></div>
+      <div class="step" data-rv><span class="sn">04</span><div><h3>Черновые работы</h3><p>Демонтаж, возведение перегородок, штукатурка по маякам, стяжка, разводка электрики и сантехники. Все скрытые работы — с актами и фото.</p><span class="dur">3–6 недель</span></div></div>
+      <div class="step" data-rv><span class="sn">05</span><div><h3>Чистовая отделка</h3><p>Шпаклёвка, покраска, укладка напольных покрытий и плитки, монтаж сантехники, света и дверей. Лазерный контроль плоскостей на каждом участке.</p><span class="dur">3–5 недель</span></div></div>
+      <div class="step" data-rv><span class="sn">06</span><div><h3>Сдача объекта</h3><p>Финальный клининг, приёмка по чек-листу из 87 пунктов, передача гарантийных документов и ключей. Мелкие замечания устраняем за 3 дня.</p><span class="dur">1–2 дня</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ПОРТФОЛИО -->
+<section id="works" style="padding-bottom:60px">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><p class="lab" data-sc>05 · Работы</p><h2 data-rv>Последние объекты</h2></div>
+      <p class="sec-note" data-rv style="--d:.15s">Все объекты сданы в срок, указанный в договоре. Покажем похожий ремонт вживую — договоримся с хозяевами.</p>
+    </div>
+    <div class="stack">
+      <article class="pcard" style="--i:0">
+        <div class="pimg" data-tag="капитальный"><img src="https://picsum.photos/seed/scandinavian-apartment-renovation/920/640" alt="Квартира в ЖК «Северный парк»"></div>
+        <div class="pinfo"><span class="pn">Объект 01 / 2024</span><h3>Квартира в ЖК «Северный парк»</h3><p>Вторичка 68 м²: полная замена коммуникаций, перепланировка без мокрых зон, тёплый пол в кухне-гостиной и скрытые двери.</p>
+          <div class="pmeta"><div><small>Площадь</small><b>68 м²</b></div><div><small>Срок</small><b>106 дней</b></div><div><small>Бюджет</small><b>4,2 млн ₽</b></div><div><small>Стиль</small><b>Скандинавский</b></div></div></div>
+      </article>
+      <article class="pcard" style="--i:1">
+        <div class="pimg" data-tag="дом под ключ"><img src="https://picsum.photos/seed/country-house-interior-wood/920/640" alt="Дом в КП «Лесной берег»"></div>
+        <div class="pinfo"><span class="pn">Объект 02 / 2024</span><h3>Дом в КП «Лесной берег»</h3><p>Отделка дома из газобетона под ключ: инженерия с нуля, котельная, лестница, 3 санузла, фасад и терраса.</p>
+          <div class="pmeta"><div><small>Площадь</small><b>184 м²</b></div><div><small>Срок</small><b>7 месяцев</b></div><div><small>Бюджет</small><b>14,8 млн ₽</b></div><div><small>Стиль</small><b>Современный</b></div></div></div>
+      </article>
+      <article class="pcard" style="--i:2">
+        <div class="pimg" data-tag="дизайнерский"><img src="https://picsum.photos/seed/stalinka-classic-renovation/920/640" alt="Сталинка на Пятницкой"></div>
+        <div class="pinfo"><span class="pn">Объект 03 / 2023</span><h3>Сталинка на Пятницкой</h3><p>Дизайн-ремонт с реставрацией лепнины, потолками 3,2 м, заменой перекрытий и латунной фурнитурой по чертежам дизайнера.</p>
+          <div class="pmeta"><div><small>Площадь</small><b>54 м²</b></div><div><small>Срок</small><b>98 дней</b></div><div><small>Бюджет</small><b>5,1 млн ₽</b></div><div><small>Стиль</small><b>Неоклассика</b></div></div></div>
+      </article>
+      <article class="pcard" style="--i:3">
+        <div class="pimg" data-tag="новостройка"><img src="https://picsum.photos/seed/modern-studio-loft-interior/920/640" alt="Студия в ЖК «Марсель»"></div>
+        <div class="pinfo"><span class="pn">Объект 04 / 2023</span><h3>Студия в ЖК «Марсель»</h3><p>Квартира под сдачу за 52 дня: износостойкие материалы, зонирование светом, мебель и техника — заезжай и живи.</p>
+          <div class="pmeta"><div><small>Площадь</small><b>32 м²</b></div><div><small>Срок</small><b>52 дня</b></div><div><small>Бюджет</small><b>1,7 млн ₽</b></div><div><small>Стиль</small><b>Минимализм</b></div></div></div>
+      </article>
+    </div>
+    <div class="stack-more" data-rv><a class="btn ghost" href="#contact">Запросить портфолио целиком <span class="ar">→</span></a></div>
+  </div>
+</section>
+
+<!-- ГАРАНТИИ -->
+<div class="guar">
+  <div class="wrap">
+    <div class="guar-row">
+      <div class="guar-item" data-rv><b>5 лет</b><p>гарантии на все виды работ — прописана в договоре, а не на словах</p></div>
+      <div class="guar-item" data-rv style="--d:.1s"><b>0 ₽</b><p>рост сметы после подписания договора. Допы — только по вашему письменному согласию</p></div>
+      <div class="guar-item" data-rv style="--d:.2s"><b>0,1%</b><p>неустойка от стоимости работ за каждый день просрочки — платим мы, а не вы ждёте</p></div>
+      <div class="guar-item" data-rv style="--d:.3s"><b>4–5</b><p>этапов оплаты: платите только за принятые работы, аванс не более 10%</p></div>
+    </div>
+    <p class="partners" data-rv>Работаем с материалами: Knauf <i>·</i> Ceresit <i>·</i> Tikkurila <i>·</i> Rehau <i>·</i> Litokol <i>·</i> Knauf <i>·</i> Weber</p>
+  </div>
+</div>
+
+<!-- ЦЕНЫ -->
+<section id="prices">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><p class="lab" data-sc>06 · Цены</p><h2 data-rv>Прайс на работы</h2></div>
+      <p class="sec-note" data-rv style="--d:.15s">Цены за работу без материалов. Итоговая стоимость зависит от состояния объекта — точную цифру даст замер.</p>
+    </div>
+    <div class="price-row" data-rv>
+      <div><h3>Косметический ремонт</h3><p class="pd">Обновление без капитальных работ — быстро и без лишнего шума.</p>
+        <div class="inc"><em>поклейка обоев</em><em>покраска</em><em>ламинат</em><em>плинтусы</em></div></div>
+      <div></div><div class="pr">от 5 500 ₽<small>за м²</small></div>
+    </div>
+    <div class="price-row" data-rv>
+      <div><h3>Капитальный ремонт</h3><p class="pd">Полный цикл с заменой всех инженерных коммуникаций.</p>
+        <div class="inc"><em>стяжка</em><em>штукатурка</em><em>электрика</em><em>сантехника</em></div></div>
+      <div></div><div class="pr">от 9 800 ₽<small>за м²</small></div>
+    </div>
+    <div class="price-row" data-rv>
+      <div><h3>Дизайнерский ремонт</h3><p class="pd">Строго по проекту: сложные узлы, скрытый свет, нестандартные материалы.</p>
+        <div class="inc"><em>авторский надзор</em><em>керамогранит 120×60</em><em>теневые профили</em></div></div>
+      <div></div><div class="pr">от 15 500 ₽<small>за м²</small></div>
+    </div>
+    <div class="price-row" data-rv>
+      <div><h3>Санузел под ключ</h3><p class="pd">Гидроизоляция, разводка, плитка, сантехника — за 21 день.</p>
+        <div class="inc"><em>гидроизоляция</em><em>плитка</em><em>инсталляция</em><em>тёплый пол</em></div></div>
+      <div></div><div class="pr">от 145 000 ₽<small>за помещение</small></div>
+    </div>
+    <p class="price-foot" data-rv>* Минимальный заказ — от 90 000 ₽. Выезд замерщика и смета бесплатны при любом объёме.</p>
+  </div>
+</section>
+
+<!-- ОТЗЫВЫ -->
+<section id="reviews" style="background:var(--paper2)">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><p class="lab" data-sc>07 · Отзывы</p><h2 data-rv>Что говорят после сдачи</h2></div>
+      <div class="rev-ctrl" data-rv>
+        <button class="rev-btn" id="revL" aria-label="Назад">←</button>
+        <button class="rev-btn" id="revR" aria-label="Вперёд">→</button>
+      </div>
+    </div>
+    <div class="rev-track" id="revTrack" data-rv>
+      <article class="rev"><span class="stars">★★★★★</span><p>Смета не выросла ни на рубль — для меня это было главным страхом. Ребята присылали фотоотчёты каждые два дня, все вопросы решали в одном чате. Сдали на 4 дня раньше срока.</p><footer><b>Марина К.</b><small>ЖК «Символ», 62 м²</small></footer></article>
+      <article class="rev"><span class="stars">★★★★★</span><p>Делали отделку дома 160 м² под ключ, включая котельную и фасад. Понравилось, что не навязывали материалы: предложили три варианта по бюджету, все чеки в таблице.</p><footer><b>Дмитрий С.</b><small>Химки, дом 160 м²</small></footer></article>
+      <article class="rev"><span class="stars">★★★★★</span><p>Ремонтировали только санузел и кухню — думала, мелкие объекты им не интересны. Сделали за 21 день, пыль закрывали плёнкой, соседей предупредили сами.</p><footer><b>Анна и Павел</b><small>Марьино, санузел + кухня</small></footer></article>
+      <article class="rev"><span class="stars">★★★★☆</span><p>Сталинка — это всегда сюрпризы: вскрыли полы, нашли гнилые лаги. Бригада не стала раздувать смету, пересогласовали работы и уложились в изначальный бюджет с небольшим плюсом.</p><footer><b>Игорь В.</b><small>Сокол, сталинка 54 м²</small></footer></article>
+      <article class="rev"><span class="stars">★★★★★</span><p>Квартиру готовили под сдачу — нужно было быстро и недорого, но чтобы выглядела дороже своей цены. Уложились в 52 дня, арендаторы заехали через неделю.</p><footer><b>Сергей Т.</b><small>ЖК «Марсель», студия</small></footer></article>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="wrap faq">
+    <div class="faq-side">
+      <p class="lab" data-sc>08 · Вопросы</p>
+      <h2 data-rv>Частые вопросы</h2>
+      <p class="sec-note" data-rv style="--d:.15s;margin-top:20px">Не нашли ответа — позвоните <a href="tel:+74951204567" style="color:var(--acc);font-weight:600">+7 (495) 120-45-67</a>, инженер ответит за 5 минут.</p>
+    </div>
+    <div data-rv>
+      <div class="fq"><button class="fq-q">Сколько стоит выезд замерщика и составление сметы?<i>+</i></button><div class="fq-a"><p>Бесплатно и ни к чему не обязывает. Инженер приедет в удобное время, сделает обмеры, а через 24 часа пришлём подробную смету. Цены в ней фиксируются на 30 дней.</p></div></div>
+      <div class="fq"><button class="fq-q">Может ли вырасти цена после подписания договора?<i>+</i></button><div class="fq-a"><p>Нет. Смета фиксируется в договоре. Дополнительные работы возможны только по вашему письменному согласованию с отдельным расчётом — никаких «внезапных» сумм в конце.</p></div></div>
+      <div class="fq"><button class="fq-q">Кто закупает материалы?<i>+</i></button><div class="fq-a"><p>Как удобнее. Можем взять закупку на себя — у нас дилерские скидки до 15% у поставщиков, все чеки отдаём. Или закупаете сами, а мы поможем с точным расчётом количества.</p></div></div>
+      <div class="fq"><button class="fq-q">Как проходит оплата?<i>+</i></button><div class="fq-a"><p>Поэтапно: платите за уже выполненный и принятый вами этап. Обычно это 4–5 платежей, аванс не более 10%. Никаких «50% вперёд за все работы».</p></div></div>
+      <div class="fq"><button class="fq-q">Что будет, если вы сорвёте сроки?<i>+</i></button><div class="fq-a"><p>В договоре прописана неустойка: 0,1% от стоимости работ за каждый день просрочки. За 16 лет более 90% объектов сданы вовремя или раньше графика.</p></div></div>
+      <div class="fq"><button class="fq-q">Какая гарантия и что она покрывает?<i>+</i></button><div class="fq-a"><p>5 лет на все виды работ. В течение первого года бесплатно устраняем любые замечания — от скрипнувшего плинтуса до регулировки дверей. Гарантия закреплена в договоре.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- КОНТАКТЫ -->
+<section class="dark contact" id="contact">
+  <div class="wrap c-grid">
+    <div>
+      <p class="lab" data-sc>09 · Контакты</p>
+      <h2 data-rv>Обсудим ваш объект?</h2>
+      <p data-rv style="--d:.1s;color:#a89f8d;max-width:420px;margin-top:18px">Оставьте заявку — перезвоним в течение 30 минут, ответим на вопросы и запишем на бесплатный замер в удобное время.</p>
+      <div class="c-list" data-rv style="--d:.2s">
+        <div class="cl"><small>Телефон</small><a class="big" href="tel:+74951204567">+7 (495) 120-45-67</a></div>
+        <div class="cl"><small>Почта</small><span>smeta@pramoy-ugol.ru</span></div>
+        <div class="cl"><small>Офис</small><span>Москва, Дербеневская наб., 7, стр. 22</span></div>
+        <div class="cl"><small>Режим работы</small><span>Ежедневно, 9:00 – 21:00 · выезд на замер — в день обращения</span></div>
+      </div>
+    </div>
+    <div class="form-card" data-rv style="--d:.15s">
+      <form id="lead" novalidate>
+        <h3>Бесплатный замер и смета</h3>
+        <p>Замер ни к чему не обязывает. Смета — через 24 часа после визита инженера.</p>
+        <div class="field" id="fName"><label for="name">Ваше имя</label><input id="name" type="text" autocomplete="name" placeholder="Как к вам обращаться"><span class="msg">Укажите имя — минимум 2 символа</span></div>
+        <div class="field" id="fPhone"><label for="phone">Телефон</label><input id="phone" type="tel" autocomplete="tel" placeholder="+7 (___) ___-__-__"><span class="msg">Проверьте номер — нужно не менее 10 цифр</span></div>
+        <div class="field"><label for="msg">Что нужно сделать?</label><textarea id="msg" rows="3" placeholder="Например: капитальный ремонт двушки 54 м², новостройка"></textarea></div>
+        <label class="consent"><input type="checkbox" id="agree" checked><span class="box">✓</span><small>Соглашаюсь на обработку персональных данных. Никакого спама — только звонок по вашей заявке.</small></label>
+        <button class="btn" type="submit" style="width:100%">Вызвать замерщика <span class="ar">→</span></button>
+      </form>
+      <div class="form-ok" id="formOk">
+        <div class="okmark">✓</div>
+        <b>Заявка принята</b>
+        <p>Перезвоним в течение 30 минут в рабочее время. Если удобнее — напишите нам сами.</p>
+        <span class="num" id="okNum">Заявка № 4821</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="hazard" aria-hidden="true"></div>
+
+<!-- ФУТЕР -->
+<footer>
+  <div class="wrap">
+    <div class="f-grid">
+      <div class="f-brand">
+        <a class="logo" href="#top"><span class="logo-m">90°</span><span class="logo-t" style="color:#efe9db">Прямой угол<small>ремонт и отделка · с 2008</small></span></a>
+        <p>Строительно-отделочная компания полного цикла. Квартиры, дома и таунхаусы в Москве и области. Свои бригады, без субподряда.</p>
+      </div>
+      <div><h4>Навигация</h4><a href="#services">Услуги</a><a href="#calc">Калькулятор</a><a href="#works">Работы</a><a href="#prices">Цены</a><a href="#faq">Вопросы</a></div>
+      <div><h4>Услуги</h4><a href="#services">Капитальный ремонт</a><a href="#services">Дизайнерский ремонт</a><a href="#services">Отделка домов</a><a href="#services">Ванные под ключ</a></div>
+      <div><h4>Контакты</h4><a href="tel:+74951204567">+7 (495) 120-45-67</a><a href="mailto:smeta@pramoy-ugol.ru">smeta@pramoy-ugol.ru</a><p>Москва, Дербеневская наб., 7</p><p>Ежедневно 9:00–21:00</p></div>
+    </div>
+    <div class="f-bottom">
+      <span>© 2008–2025 ООО «Прямой Угол» · ИНН 7725123456</span>
+      <span>Цены на сайте не являются публичной офертой</span>
+      <a href="#top">Наверх ↑</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+"use strict";
+const $=(s,c=document)=>c.querySelector(s), $$=(s,c=document)=>[...c.querySelectorAll(s)];
+const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const fmt=n=>Math.round(n).toLocaleString('ru-RU');
+
+/* год и дата в смете */
+$('#billDate').textContent=new Date().toLocaleDateString('ru-RU');
+$('#billNo').textContent=Math.floor(1000+Math.random()*9000);
+
+/* появление хиро */
+requestAnimationFrame(()=>setTimeout(()=>document.body.classList.add('loaded'),80));
+
+/* шапка */
+const hdr=$('#hdr');
+addEventListener('scroll',()=>hdr.classList.toggle('sc',scrollY>24),{passive:true});
+
+/* мобильное меню */
+const mnav=$('#mnav');
+$('#burger').onclick=()=>{mnav.classList.add('open');document.body.style.overflow='hidden'};
+const closeM=()=>{mnav.classList.remove('open');document.body.style.overflow=''};
+$('#mclose').onclick=closeM;
+$$('.mnav a').forEach(a=>a.onclick=closeM);
+
+/* рулетка */
+const ruler=$('#ruler');let rh='';
+for(let i=0;i<60;i++)rh+=`<span>${i*10}</span>`;
+ruler.innerHTML=rh;
+
+/* бегущая строка — дублируем контент */
+const mq=$('#marq');mq.innerHTML+=mq.innerHTML;
+
+/* reveal + счётчики + скрэмбл */
+const io=new IntersectionObserver(es=>es.forEach(e=>{
+  if(!e.isIntersecting)return;
+  const el=e.target;
+  el.classList.add('in');
+  if(el.hasAttribute('data-sc')&&!reduced)scramble(el);
+  io.unobserve(el);
+}),{threshold:.18});
+$$('[data-rv],[data-sc]').forEach(el=>io.observe(el));
+
+$$('[data-count]').forEach(el=>{
+  const t=+el.dataset.count;
+  new IntersectionObserver((es,obs)=>es.forEach(e=>{
+    if(!e.isIntersecting)return;obs.disconnect();
+    if(reduced){el.textContent=t;return}
+    const st=performance.now(),dur=1400;
+    (function f(n){const p=Math.min(1,(n-st)/dur),ea=1-Math.pow(1-p,3);
+      el.textContent=Math.round(t*ea);if(p<1)requestAnimationFrame(f)})(st);
+  }),{threshold:.6}).observe(el);
+});
+
+function scramble(el){
+  const txt=el.textContent,chars='АВЕЖКМРСТУХ0123456789/#·';
+  let frame=0;const total=txt.length*3+8;
+  (function tick(){
+    let out='';
+    for(let i=0;i<txt.length;i++){
+      out+=i<(frame/3)?txt[i]:(txt[i]===' '?' ':chars[Math.random()*chars.length|0]);
+    }
+    el.textContent=out;
+    if(frame++<total)requestAnimationFrame(tick);else el.textContent=txt;
+  })();
+}
+
+/* живой счётчик бригад */
+const live=$('#live');
+setInterval(()=>{
+  const v=20+Math.floor(Math.random()*8);
+  live.textContent=v;
+  if(!reduced){live.classList.add('pop');setTimeout(()=>live.classList.remove('pop'),320)}
+},11000);
+
+/* таймер на «смете» */
+const cd=$('#cd'),end=Date.now()+24*3600*1000;
+setInterval(()=>{
+  let s=Math.max(0,Math.floor((end-Date.now())/1000));
+  const h=String(Math.floor(s/3600)).padStart(2,'0'),m=String(Math.floor(s%3600/60)).padStart(2,'0'),ss=String(s%60).padStart(2,'0');
+  cd.textContent=`${h}:${m}:${ss}`;
+},1000);
+
+/* было/стало */
+const ba=$('#ba'),baRange=$('#baRange'),baPct=$('#baPct');
+baRange.addEventListener('input',()=>{
+  ba.style.setProperty('--pos',baRange.value+'%');
+  baPct.textContent=baRange.value+'%';
+});
+
+/* ======= КАЛЬКУЛЯТОР ======= */
+const rates={cos:5500,cap:9800,des:15500}, dRate={cos:.9,cap:1.6,des:2.1};
+const names={cos:'косметический',cap:'капитальный',des:'дизайнерский'};
+const state={obj:1,objName:'квартира',kind:'cos',area:68,dem:false,proj:false,mat:false};
+const optPrice={dem:1200,proj:1100,mat:4300};
+let shown=0,raf=null;
+
+function tween(target){
+  if(reduced){$('#bTotal').textContent=fmt(target)+' ₽';shown=target;return}
+  cancelAnimationFrame(raf);
+  const from=shown,st=performance.now(),dur=450;
+  (function f(n){const p=Math.min(1,(n-st)/dur),ea=1-Math.pow(1-p,3);
+    shown=from+(target-from)*ea;
+    $('#bTotal').textContent=fmt(shown)+' ₽';
+    if(p<1)raf=requestAnimationFrame(f)})(st);
+}
+function calc(){
+  const rate=rates[state.kind]*state.obj;
+  const work=rate*state.area;
+  const dem=state.dem?optPrice.dem*state.obj*state.area:0;
+  const proj=state.proj?optPrice.proj*state.obj*state.area:0;
+  const mat=state.mat?optPrice.mat*state.obj*state.area:0;
+  $('#bWork').textContent=fmt(work)+' ₽';
+  [['#bDem',dem],['#bProj',proj],['#bMat',mat]].forEach(([id,v])=>{
+    const el=$(id);el.textContent=v?fmt(v)+' ₽':'—';el.classList.toggle('off',!v);
+  });
+  const total=work+dem+proj+mat;
+  tween(total);
+  $('#bPer').textContent=fmt(total/state.area)+' ₽/м²';
+  const days=Math.round((state.area*dRate[state.kind]+18)*state.obj/5)*5;
+  $('#bDays').textContent='≈ '+days+' дней';
+  return {total,days};
+}
+$('#segObj').addEventListener('click',e=>{
+  const b=e.target.closest('button');if(!b)return;
+  $$('#segObj button').forEach(x=>x.classList.remove('on'));b.classList.add('on');
+  state.obj=+b.dataset.m;state.objName=b.textContent.trim().toLowerCase();calc();
+});
+$('#rt').addEventListener('change',e=>{
+  state.kind=e.target.value;
+  $$('#rt label').forEach(l=>l.classList.toggle('on',l.querySelector('input').checked));
+  calc();
+});
+$('#area').addEventListener('input',e=>{
+  state.area=+e.target.value;$('#areaOut').textContent=state.area;calc();
+});
+[['#optDem','dem'],['#optProj','proj'],['#optMat','mat']].forEach(([id,k])=>{
+  $(id).addEventListener('change',e=>{state[k]=e.target.checked;calc()});
+});
+$('#fixBtn').addEventListener('click',()=>{
+  const r=calc();
+  $('#msg').value=`Хочу зафиксировать цену: ${names[state.kind]} ремонт, ${state.objName}, ${state.area} м², ≈ ${fmt(r.total)} ₽, срок ≈ ${r.days} дней.`;
+  location.hash='#contact';
+});
+calc();
+
+/* этапы — активный шаг */
+const steps=$$('.step'),pIdx=$('#pIdx'),pFill=$('#pFill');
+const stepIO=new IntersectionObserver(es=>es.forEach(e=>{
+  if(!e.isIntersecting)return;
+  const i=steps.indexOf(e.target);
+  steps.forEach((s,j)=>s.classList.toggle('on',j<=i));
+  pIdx.textContent=String(i+1).padStart(2,'0');
+  pFill.style.width=((i+1)/steps.length*100)+'%';
+}),{rootMargin:'-42% 0px -42%'});
+steps.forEach(s=>stepIO.observe(s));
+
+/* отзывы */
+const track=$('#revTrack');
+$('#revL').onclick=()=>track.scrollBy({left:-396,behavior:reduced?'auto':'smooth'});
+$('#revR').onclick=()=>track.scrollBy({left:396,behavior:reduced?'auto':'smooth'});
+
+/* FAQ */
+$$('.fq').forEach(f=>{
+  const q=$('.fq-q',f),a=$('.fq-a',f);
+  q.onclick=()=>{
+    const open=f.classList.contains('open');
+    $$('.fq.open').forEach(o=>{o.classList.remove('open');$('.fq-a',o).style.maxHeight=0});
+    if(!open){f.classList.add('open');a.style.maxHeight=a.scrollHeight+'px'}
+  };
+});
+
+/* шпион навигации */
+const spy=new IntersectionObserver(es=>es.forEach(e=>{
+  if(!e.isIntersecting)return;
+  $$('nav.main a').forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#'+e.target.id));
+}),{rootMargin:'-30% 0px -60%'});
+['services','calc','works','prices','contact'].forEach(id=>{const s=document.getElementById(id);if(s)spy.observe(s)});
+
+/* форма */
+$('#lead').addEventListener('submit',e=>{
+  e.preventDefault();
+  let ok=true;
+  const name=$('#name'),phone=$('#phone');
+  const fN=$('#fName'),fP=$('#fPhone');
+  fN.classList.remove('err');fP.classList.remove('err');
+  if(name.value.trim().length<2){fN.classList.add('err');ok=false}
+  if((phone.value.replace(/\D/g,'')).length<10){fP.classList.add('err');ok=false}
+  if(!$('#agree').checked){ok=false;alert('Подтвердите согласие на обработку данных')}
+  if(!ok)return;
+  $('#lead').style.display='none';
+  $('#okNum').textContent='Заявка № '+Math.floor(1000+Math.random()*9000)+' · '+name.value.trim();
+  $('#formOk').classList.add('show');
+});
+})();
+</script>
+</body>
+</html>
