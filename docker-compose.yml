@@ -1,0 +1,32 @@
+# services:
+#   web:
+#     build: .
+#     restart: unless-stopped
+#     ports: ["80:80", "443:443"]
+#     volumes:
+#       - certbot_www:/var/www/certbot
+#       - certbot_etc:/etc/letsencrypt:ro
+#   certbot:
+#     image: certbot/certbot
+#     volumes:
+#       - certbot_www:/var/www/certbot
+#       - certbot_etc:/etc/letsencrypt
+# volumes:
+#   certbot_www:
+#   certbot_etc:
+
+services:
+  web:
+    image: caddy:2-alpine
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - ./public:/srv:ro
+      - caddy_data:/data
+      - caddy_config:/config
+volumes:
+  caddy_data:
+  caddy_config:
