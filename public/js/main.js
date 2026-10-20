@@ -154,10 +154,40 @@ $('#area').addEventListener('input',e=>{
 [['#optDem','dem'],['#optProj','proj'],['#optMat','mat']].forEach(([id,k])=>{
   $(id).addEventListener('change',e=>{state[k]=e.target.checked;calc()});
 });
-$('#fixBtn').addEventListener('click',()=>{
-  const r=calc();
-  $('#msg').value=`Хочу зафиксировать цену: ${names[state.kind]} ремонт, ${state.objName}, ${state.area} м², ≈ ${fmt(r.total)} ₽, срок ≈ ${r.days} дней.`;
-  location.hash='#contact';
+$('#fixBtn').addEventListener('click', function(){
+  const btn = this;
+  const label = btn.querySelector('.fix-label');
+  const r = calc();
+  const msg = `Хочу зафиксировать цену: ${names[state.kind]} ремонт, ${state.objName}, ${state.area} м², ≈ ${fmt(r.total)} ₽, срок ≈ ${r.days} дней.`;
+
+  // Если уже зафиксирована — просто ведём к форме
+  if (btn.classList.contains('fixed')) {
+    $('#msg').value = msg;
+    location.hash = '#contact';
+    return;
+  }
+
+  const origText = label.textContent;
+
+  // Визуальное подтверждение
+  btn.classList.add('fixed');
+  label.textContent = 'Цена зафиксирована';
+  const check = document.createElement('span');
+  check.className = 'fix-check';
+  check.textContent = '✓';
+  btn.appendChild(check);
+
+  $('#msg').value = msg;
+
+  // Даём анимации показаться, потом ведём к форме
+  setTimeout(() => { location.hash = '#contact'; }, 1300);
+
+  // Возвращаем исходный вид кнопки
+  setTimeout(() => {
+    btn.classList.remove('fixed');
+    label.textContent = origText;
+    check.remove();
+  }, 3000);
 });
 calc();
 

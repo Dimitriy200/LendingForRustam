@@ -444,3 +444,30 @@ footer{background:#12100c;color:#efe9db;padding:70px 0 0}
   [data-rv]{opacity:1;transform:none}
   .step{opacity:1}
 }
+
+
+
+/* === Фиксация цены: галочка из угла === */
+.btn.fix{position:relative}
+.btn.fix.fixed{background:var(--paper);border-color:var(--paper);color:var(--ink)}
+.fix-check{
+  position:absolute;top:-13px;right:-13px;
+  width:32px;height:32px;border-radius:50%;
+  background:var(--acc);color:#fff;
+  display:grid;place-items:center;
+  font-size:16px;font-weight:700;line-height:1;
+  box-shadow:0 3px 12px rgba(232,85,31,.5);
+  opacity:0;transform:scale(0) translate(20px,20px);
+  pointer-events:none;
+}
+.btn.fix.fixed .fix-check{
+  animation:fixPop .5s cubic-bezier(.34,1.56,.64,1) .05s forwards;
+}
+@keyframes fixPop{
+  from{opacity:0;transform:scale(0) translate(20px,20px)}
+  70%{opacity:1;transform:scale(1.15) translate(0,0)}
+  to{opacity:1;transform:scale(1) translate(0,0)}
+}
+@media (prefers-reduced-motion: reduce){
+  .btn.fix.fixed .fix-check{animation:none;opacity:1;transform:none}
+}
