@@ -341,9 +341,16 @@ input[type=range].ar::-moz-range-thumb{width:20px;height:20px;background:var(--a
 .rev:hover{transform:translateY(-5px)}
 .rev .stars{color:var(--acc);letter-spacing:3px;font-size:14px}
 .rev p{font-size:14.5px;line-height:1.65;flex:1}
-.rev footer{border-top:1px solid var(--line);padding-top:16px;display:flex;justify-content:space-between;gap:10px}
-.rev footer b{font-size:14px}
-.rev footer small{font:400 11px var(--fm);color:var(--mut);letter-spacing:.06em}
+
+.rev footer{
+  display:flex;justify-content:space-between;align-items:baseline;gap:10px;
+  background:var(--paper);
+  border:1px solid var(--paper2);
+  padding:10px 10px;
+}
+/* .rev footer{border:1px solid var(--paper2); background:var(--paper);padding-top:16px;display:flex;justify-content:space-between;gap:10px} */
+.rev footer b{font-size:14px; color:var(--acc)}
+.rev footer small{font:400 11px var(--fm);color:var(--acc);letter-spacing:.06em}
 
 /* ============ FAQ ============ */
 .faq{display:grid;grid-template-columns:.8fr 1.2fr;gap:70px;align-items:start}
