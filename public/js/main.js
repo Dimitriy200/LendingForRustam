@@ -98,14 +98,6 @@ setInterval(()=>{
   if(!reduced){live.classList.add('pop');setTimeout(()=>live.classList.remove('pop'),320)}
 },11000);
 
-/* таймер на «смете» */
-const cd=$('#cd'),end=Date.now()+24*3600*1000;
-setInterval(()=>{
-  let s=Math.max(0,Math.floor((end-Date.now())/1000));
-  const h=String(Math.floor(s/3600)).padStart(2,'0'),m=String(Math.floor(s%3600/60)).padStart(2,'0'),ss=String(s%60).padStart(2,'0');
-  cd.textContent=`${h}:${m}:${ss}`;
-},1000);
-
 /* было/стало */
 const ba=$('#ba'),baRange=$('#baRange'),baPct=$('#baPct');
 baRange.addEventListener('input',()=>{
