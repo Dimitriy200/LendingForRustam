@@ -1,7 +1,9 @@
-// Прелоадер — скрыть после загрузки всех ресурсов
+// ============================================================
+// ПРЕЛОАДЕР — скрыть после загрузки всех ресурсов
+// ============================================================
 (function(){
   document.documentElement.classList.remove('no-js');
-  
+
   let loaded = false;
   const hidePreloader = () => {
     if (loaded) return;
@@ -13,24 +15,26 @@
     }
   };
 
-  // Скрыть после загрузки всех ресурсов
+  // Скрыть после полной загрузки ресурсов
   window.addEventListener('load', () => {
-    setTimeout(hidePreloader, 600); // Дать анимации прогресса завершиться
+    setTimeout(hidePreloader, 600);
   });
 
-  // Резервный вариант: скрыть через 3 секунды даже если что-то не загрузилось
+  // Резерв: максимум 3 секунды, даже если что-то грузится долго
   setTimeout(hidePreloader, 3000);
 })();
 
 
-
+// ============================================================
+// ОСНОВНАЯ ЛОГИКА САЙТА
+// ============================================================
 (function(){
 "use strict";
 const $=(s,c=document)=>c.querySelector(s), $$=(s,c=document)=>[...c.querySelectorAll(s)];
 const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
 const fmt=n=>Math.round(n).toLocaleString('ru-RU');
 
-/* год и дата в смете */
+/* дата и номер в смете */
 $('#billDate').textContent=new Date().toLocaleDateString('ru-RU');
 $('#billNo').textContent=Math.floor(1000+Math.random()*9000);
 
@@ -53,10 +57,10 @@ const ruler=$('#ruler');let rh='';
 for(let i=0;i<60;i++)rh+=`<span>${i*10}</span>`;
 ruler.innerHTML=rh;
 
-/* бегущая строка — дублируем контент */
+/* бегущая строка — дублируем контент для бесшовности */
 const mq=$('#marq');mq.innerHTML+=mq.innerHTML;
 
-/* reveal + счётчики + скрэмбл */
+/* reveal + скрэмбл */
 const io=new IntersectionObserver(es=>es.forEach(e=>{
   if(!e.isIntersecting)return;
   const el=e.target;
@@ -66,6 +70,7 @@ const io=new IntersectionObserver(es=>es.forEach(e=>{
 }),{threshold:.18});
 $$('[data-rv],[data-sc]').forEach(el=>io.observe(el));
 
+/* анимированные счётчики */
 $$('[data-count]').forEach(el=>{
   const t=+el.dataset.count;
   new IntersectionObserver((es,obs)=>es.forEach(e=>{
@@ -99,9 +104,12 @@ setInterval(()=>{
 },11000);
 
 /* было/стало */
-const ba=$('#ba'),baRange=$('#baRange'),baPct=$('#baPct');
+const ba=document.querySelector('.ba');
+const baRange=document.querySelector('#baRange');
+const baPct=document.querySelector('#baPct');
+
 baRange.addEventListener('input',()=>{
-  ba.style.setProperty('--pos',baRange.value+'%');
+  ba.style.setProperty('--pos', baRange.value+'%');
   baPct.textContent=baRange.value+'%';
 });
 
@@ -154,6 +162,8 @@ $('#area').addEventListener('input',e=>{
 [['#optDem','dem'],['#optProj','proj'],['#optMat','mat']].forEach(([id,k])=>{
   $(id).addEventListener('change',e=>{state[k]=e.target.checked;calc()});
 });
+
+/* Зафиксировать цену — с анимацией галочки */
 $('#fixBtn').addEventListener('click', function(){
   const btn = this;
   const label = btn.querySelector('.fix-label');
@@ -224,19 +234,45 @@ const spy=new IntersectionObserver(es=>es.forEach(e=>{
 }),{rootMargin:'-30% 0px -60%'});
 ['services','calc','works','prices','contact'].forEach(id=>{const s=document.getElementById(id);if(s)spy.observe(s)});
 
-/* форма */
-$('#lead').addEventListener('submit',e=>{
+/* форма — отправка на /api/lead */
+$('#lead').addEventListener('submit', async e => {
   e.preventDefault();
-  let ok=true;
-  const name=$('#name'),phone=$('#phone');
-  const fN=$('#fName'),fP=$('#fPhone');
-  fN.classList.remove('err');fP.classList.remove('err');
-  if(name.value.trim().length<2){fN.classList.add('err');ok=false}
-  if((phone.value.replace(/\D/g,'')).length<10){fP.classList.add('err');ok=false}
-  if(!$('#agree').checked){ok=false;alert('Подтвердите согласие на обработку данных')}
-  if(!ok)return;
-  $('#lead').style.display='none';
-  $('#okNum').textContent='Заявка № '+Math.floor(1000+Math.random()*9000)+' · '+name.value.trim();
-  $('#formOk').classList.add('show');
+  let ok = true;
+  const name = $('#name'), phone = $('#phone');
+  const fN = $('#fName'), fP = $('#fPhone');
+  fN.classList.remove('err'); fP.classList.remove('err');
+  if (name.value.trim().length < 2) { fN.classList.add('err'); ok = false; }
+  if ((phone.value.replace(/\D/g,'')).length < 10) { fP.classList.add('err'); ok = false; }
+  if (!$('#agree').checked) { ok = false; alert('Подтвердите согласие на обработку данных'); }
+  if (!ok) return;
+
+  const btn = $('#lead button[type=submit]');
+  const origBtn = btn.innerHTML;
+  btn.disabled = true;
+  btn.innerHTML = 'Отправляем…';
+
+  const payload = {
+    name: name.value.trim(),
+    phone: phone.value.trim(),
+    message: $('#msg').value.trim(),
+    source: 'landing'
+  };
+
+  try {
+    const res = await fetch('/api/lead', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    if (!res.ok) throw new Error('bad response');
+
+    $('#lead').style.display = 'none';
+    $('#okNum').textContent = 'Заявка № ' + Math.floor(1000 + Math.random()*9000) + ' · ' + name.value.trim();
+    $('#formOk').classList.add('show');
+  } catch (err) {
+    btn.disabled = false;
+    btn.innerHTML = origBtn;
+    alert('Не удалось отправить. Позвоните нам: +7 (495) 120-45-67');
+  }
 });
 })();

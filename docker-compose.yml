@@ -27,6 +27,14 @@ services:
       - ./public:/srv:ro
       - caddy_data:/data
       - caddy_config:/config
+
+  api:
+    build: ./api
+    restart: unless-stopped
+    environment:
+      BOT_TOKEN: ${BOT_TOKEN}
+      CHAT_ID: ${CHAT_ID}
+
 volumes:
   caddy_data:
   caddy_config:
