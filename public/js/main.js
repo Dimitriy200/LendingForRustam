@@ -259,7 +259,15 @@ $('#lead').addEventListener('submit', async e => {
   };
 
   try {
-    const res = await fetch('/api/lead', {
+    // ДЛЯ ПРОДА
+    // const res = await fetch('/api/lead', {
+    //   method: 'POST',
+    //   headers: { 'Content-Type': 'application/json' },
+    //   body: JSON.stringify(payload)
+    // });
+    
+    // ДЛЯ ТЕСТА
+    const res = await fetch('http://127.0.0.1:3000/api/lead', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload)
