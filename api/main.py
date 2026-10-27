@@ -6,12 +6,20 @@ from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 from aiogram import Bot
+from dotenv import load_dotenv
+from pathlib import Path
 
 
+ENV_PATH = Path(__file__).parent / ".env"
+load_dotenv()
 logging.basicConfig(level=logging.INFO)
 
-BOT_TOKEN = os.environ["BOT_TOKEN"]
-CHAT_ID = os.environ["CHAT_ID"]
+BOT_TOKEN = os.environ.get("BOT_TOKEN")
+CHAT_ID = os.environ.get("CHAT_ID")
+logging.info(f"ENV_PATH = {ENV_PATH}")
+logging.info(f"BOT_TOKEN = {BOT_TOKEN}")
+logging.info(f"CHAT_ID = {CHAT_ID}")
+
 
 bot = Bot(token=BOT_TOKEN)
 
@@ -41,9 +49,9 @@ class Lead(BaseModel):
 async def lead(data: Lead):
     text = (
         "🔔 Новая заявка с лендинга"
-        f"%0A%0AИмя: {data.name}"
-        f"%0AТелефон: {data.phone}"
-        f"%0AКомментарий: {data.message or '—'}"
+        f"Имя: {data.name}" # %0A%0A
+        f"Телефон: {data.phone}" # %0A
+        f"Комментарий: {data.message or '—'}" # %0A
     )
     try:
         await bot.send_message(CHAT_ID, text)
