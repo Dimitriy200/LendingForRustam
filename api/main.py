@@ -14,8 +14,16 @@ from aiogram.utils.formatting import Bold, as_key_value, as_marked_section, as_m
 
 
 ENV_PATH = Path(__file__).parent / ".env"
+LOG_PATH = Path(__file__).parent.parent / "logs.log"
+
 load_dotenv()
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(
+    level = logging.INFO,
+    filename =  LOG_PATH,
+    filemode = "w",
+    format = "%(asctime)s %(levelname)s [%(filename)s:%(lineno)d] %(message)s"
+)
+
 
 BOT_TOKEN = os.environ.get("BOT_TOKEN")
 CHAT_ID = os.environ.get("CHAT_ID")
@@ -23,9 +31,7 @@ logging.info(f"ENV_PATH = {ENV_PATH}")
 logging.info(f"BOT_TOKEN = {BOT_TOKEN}")
 logging.info(f"CHAT_ID = {CHAT_ID}")
 
-
 bot = Bot(token=BOT_TOKEN)
-
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -57,12 +63,6 @@ async def lead(data: Lead):
         as_key_value("КОММЕНТАРИЙ", data.message or '—'),
         marker="" # Убираем маркеры списков (точки)
     )
-    # text = (
-    #     f"{html.bold('НОВАЯ ЗАЯВКА С ЛЕНДИНГА')}\n\n"
-    #     f"{html.bold('ИМЯ:')} {html.quote(data.name)}\n"
-    #     f"{html.bold('ТЕЛЕФОН:')} {html.quote(data.phone)}\n"
-    #     f"{html.bold('КОММЕНТАРИЙ:')} {html.quote(data.message or '—')}"
-    # )
     try:
         await bot.send_message(
             chat_id=CHAT_ID,

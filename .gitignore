@@ -7,3 +7,4 @@ img
 *.pyc
 caddy_data/
 caddy_config/
+*.log
