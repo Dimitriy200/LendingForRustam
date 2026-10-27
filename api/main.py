@@ -27,9 +27,9 @@ logging.basicConfig(
 
 BOT_TOKEN = os.environ.get("BOT_TOKEN")
 CHAT_ID = os.environ.get("CHAT_ID")
-logging.info(f"ENV_PATH = {ENV_PATH}")
-logging.info(f"BOT_TOKEN = {BOT_TOKEN}")
-logging.info(f"CHAT_ID = {CHAT_ID}")
+# logging.info(f"ENV_PATH = {ENV_PATH}")
+# logging.info(f"BOT_TOKEN = {BOT_TOKEN}")
+# logging.info(f"CHAT_ID = {CHAT_ID}")
 
 bot = Bot(token=BOT_TOKEN)
 
