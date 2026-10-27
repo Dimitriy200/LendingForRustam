@@ -8,6 +8,9 @@ from pydantic import BaseModel, Field
 from aiogram import Bot
 from dotenv import load_dotenv
 from pathlib import Path
+from aiogram.enums import ParseMode
+from aiogram.utils.formatting import Bold, as_key_value, as_marked_section, as_marked_list
+
 
 
 ENV_PATH = Path(__file__).parent / ".env"
@@ -47,14 +50,26 @@ class Lead(BaseModel):
 
 @app.post("/api/lead")
 async def lead(data: Lead):
-    text = (
-        "🔔 Новая заявка с лендинга"
-        f"Имя: {data.name}" # %0A%0A
-        f"Телефон: {data.phone}" # %0A
-        f"Комментарий: {data.message or '—'}" # %0A
+    content = as_marked_section(
+        Bold("НОВАЯ ЗАЯВКА С ЛЕНДИНГА\n"),
+        as_key_value("ИМЯ", data.name),
+        as_key_value("ТЕЛЕФОН", data.phone),
+        as_key_value("КОММЕНТАРИЙ", data.message or '—'),
+        marker="" # Убираем маркеры списков (точки)
     )
+    # text = (
+    #     f"{html.bold('НОВАЯ ЗАЯВКА С ЛЕНДИНГА')}\n\n"
+    #     f"{html.bold('ИМЯ:')} {html.quote(data.name)}\n"
+    #     f"{html.bold('ТЕЛЕФОН:')} {html.quote(data.phone)}\n"
+    #     f"{html.bold('КОММЕНТАРИЙ:')} {html.quote(data.message or '—')}"
+    # )
     try:
-        await bot.send_message(CHAT_ID, text)
+        await bot.send_message(
+            chat_id=CHAT_ID,
+            text=content.as_html(),
+            parse_mode=ParseMode.HTML
+        )
+        # await bot.send_message(CHAT_ID, text)
     except Exception:
         logging.exception("Failed to send lead")
         raise HTTPException(status_code=500, detail="send failed")
